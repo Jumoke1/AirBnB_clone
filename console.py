@@ -161,7 +161,4 @@ class HBNBCommand(cmd.Cmd):
         """Handles empty entry + Enter"""
         pass
 if __name__ == "__main__":
-    try:
-        HBNBCommand().cmdloop()
-    except KeyboardInterrupt:
-        pass
+    HBNBCommand().cmdloop(stop_on_error=True)
