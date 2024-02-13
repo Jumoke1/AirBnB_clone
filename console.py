@@ -9,9 +9,15 @@ from models.review import Review
 from models.state import State
 
 all_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+
+
 class HBNBCommand(cmd.Cmd):
+    """The command interpreter class"""
+
     prompt = "(hbnb)"
+
     def do_EOF(self, line):
+        """Command to exit from keyboard interruption"""
         return True
 
     def do_quit(self, line):
@@ -19,6 +25,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, line):
+        """Creates new object"""
         storage.reload()
         objs = storage.all()
         if not line.strip():
@@ -36,6 +43,7 @@ class HBNBCommand(cmd.Cmd):
         print(new_mod.id)
 
     def do_show(self, line):
+        """Show info about a specified object"""
         storage.reload()
         objs = storage.all()
         if not line.strip():
@@ -61,6 +69,7 @@ class HBNBCommand(cmd.Cmd):
         print(new_obj)
 
     def do_destroy(self, line):
+        """Delete info of an object from storage"""
         storage.reload()
         objs = storage.all()
         if not line.strip():
@@ -84,6 +93,7 @@ class HBNBCommand(cmd.Cmd):
         storage.save2(objs)
 
     def do_all(self, line):
+        """Display a list of string rep of objects of a specified class"""
         storage.reload()
         objs = storage.all()
         #all_classes = [obj["__class__"] for obj in objs.values()]
@@ -105,6 +115,7 @@ class HBNBCommand(cmd.Cmd):
         print(list_obj_str)
 
     def do_update(self, line):
+        """Updates an object's attribute"""
         storage.reload()
         objs = storage.all()
         if not line.strip():
@@ -143,12 +154,14 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_exit(self,line):
+        """Exits from the program"""
         return True
         
     def emptyline(self):
+        """Handles empty entry + Enter"""
         pass
 if __name__ == "__main__":
     try:
         HBNBCommand().cmdloop()
-    except:
+    except KeyboardInterrupt:
         pass
