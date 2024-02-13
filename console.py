@@ -155,7 +155,7 @@ class HBNBCommand(cmd.Cmd):
         value = args_list[3]
         obj_dict = objs[obj_id]
         new_obj = eval(f"{chosen_class}(**{obj_dict})")
-        value = type(getattr(new_obj, attribute))(value)
+        #value = type(getattr(new_obj, attribute))(value)
         setattr(new_obj, attribute, value)
         storage.new(new_obj)
         storage.save()
