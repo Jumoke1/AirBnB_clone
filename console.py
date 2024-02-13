@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import cmd
-from models.base_model import storage, BaseModel
+from models import storage
+from models.base_model import BaseModel
 from models.user import User
 from models.amenity import Amenity
 from models.city import City
@@ -14,15 +15,20 @@ all_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review
 class HBNBCommand(cmd.Cmd):
     """The command interpreter class"""
 
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     def do_EOF(self, line):
         """Command to exit from keyboard interruption"""
+        print('')
         return True
 
     def do_quit(self, line):
         """Quit command to exit the program"""
         return True
+    
+    def do_help(self, line):
+        """To get help on a command, type help <command>"""
+        return super().do_help(line)
 
     def do_create(self, line):
         """Creates new object"""
@@ -162,4 +168,4 @@ class HBNBCommand(cmd.Cmd):
         """Handles empty entry + Enter"""
         pass
 if __name__ == "__main__":
-    HBNBCommand().cmdloop(stop_on_error=True)
+    HBNBCommand().cmdloop()
